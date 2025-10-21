@@ -1,32 +1,29 @@
 # Human-Activity-Recognition
-This project analyzes smartphone sensor data from the UCI HAR Dataset to classify human activities like walking and sitting. It involves preprocessing the data and exploratory analysis to build a model for recognizing movement patterns.
-Objective: The project's primary goal is to build a model that can automatically classify human physical activities using data from smartphone sensors.
+Importing Libraries: The code begins by importing essential Python libraries: numpy for numerical operations and pandas for data manipulation and analysis, which are fundamental for handling the dataset.
 
-Data Source: It utilizes the well-known UCI HAR Dataset, a benchmark dataset in the activity recognition field.
+Loading Feature Names: It reads the features.txt file, which contains the names of the 561 calculated features, and stores them in a list for use as column headers.
 
-Sensor Data: The raw data is collected from the accelerometer and gyroscope of a smartphone, capturing movement and rotation signals.
+Handling Duplicate Features: A crucial data preparation step where it identifies and makes duplicate feature names unique by appending a numerical suffix (e.g., _1, _2) to avoid errors during model training.
 
-Feature Engineering: The dataset provides 561 pre-engineered features derived from the raw sensor data, which include statistical measures like mean, standard deviation, and frequency domain components.
+Loading Training Data: The main training dataset (X_train.txt) is loaded into a Pandas DataFrame, using the cleaned feature names as column headers for structured data handling.
 
-Data Loading: The code loads both the training and testing datasets from their respective text files into structured Pandas DataFrames for efficient manipulation.
+Adding Subject Information: A column for the subject ID (the person who performed the activity) is merged into the training DataFrame from the subject_train.txt file.
 
-Data Preprocessing: A key preprocessing step involves making all feature names unique to avoid conflicts during model training, as the original dataset contained duplicate feature names.
+Loading and Mapping Activity Labels: The activity codes (y_train.txt) are loaded and then mapped from numbers (1-6) to descriptive string labels (e.g., 1 becomes 'WALKING') for better interpretability.
 
-Data Integration: The subject identifiers (who performed the activity) and the activity labels (what activity was performed) are merged with the main feature data into a single, cohesive DataFrame for both training and test sets.
+Creating a Consolidated Training Set: All the components—sensor features, subject ID, activity code, and activity name—are combined into a single, comprehensive training DataFrame called train.
 
-Activity Mapping: Numerical activity codes (1-6) are mapped to their descriptive string labels (e.g., WALKING, SITTING, LAYING) to make the data more interpretable.
+Repeating the Process for Test Data: The exact same procedure for loading data, adding subjects, mapping activities, and creating a consolidated DataFrame is repeated for the test dataset (X_test.txt, subject_test.txt, y_test.txt), resulting in the test DataFrame.
 
-Data Quality Checks: The project includes essential data cleaning steps, verifying that there are no duplicate rows and no missing (NaN) values in the dataset.
+Initial Data Quality Checks: The code performs basic data cleaning checks by printing the number of duplicate rows and the total number of missing (NaN) values in both the training and test sets.
 
-Exploratory Data Analysis (EDA): Initial analysis involves visualizing the distribution of activities across different subjects and the overall dataset to check for potential imbalances or biases.
+Visualization Setup: It imports matplotlib.pyplot and seaborn for data visualization and sets a style (whitegrid) and font for the plots to ensure they are clear and aesthetically consistent.
 
-Class Distribution: A count plot is used to visualize the number of data points for each activity, ensuring a balanced dataset for training a robust model.
+Visualizing Data per Subject: A count plot is generated to show how many data samples each subject provided, broken down by the type of activity, helping to identify if data collection was balanced across participants.
 
-Feature Name Cleaning: The code further processes the column names by removing parentheses and other characters to create cleaner, more programmer-friendly feature names.
+Visualizing Overall Activity Distribution: Another count plot visualizes the total number of data points available for each activity type, which is vital for checking if the dataset is balanced across different activities.
 
-Data Persistence: The processed and cleaned training and test DataFrames are saved as CSV files, making them readily available for the subsequent machine learning modeling phase.
+Cleaning Column Names: To make the feature names more programmer-friendly and compatible with various machine learning libraries, it removes parentheses (), dashes -, and commas , from all column names in both DataFrames.
 
-Foundation for Modeling: All the steps above serve to create a clean, well-structured, and analyzed dataset, forming a solid foundation for training and evaluating various classification algorithms.
-
-Real-world Application: The ultimate application is to recognize and classify human activities, which has uses in fitness tracking, healthcare monitoring, and smart environment systems.
+Saving Processed Datasets: Finally, the fully processed and cleaned training and test DataFrames are saved as new CSV files (train.csv and test.csv), creating a clean, ready-to-use dataset for the next stage: building and training the machine learning model.
 
